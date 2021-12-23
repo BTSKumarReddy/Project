@@ -25,4 +25,11 @@ public class StockExchange {
     @DBRef
     private List<Company> companies=new ArrayList<>();
 
+    public StockExchange(String id, String name, String brief, String contact_Address, String remarks) {
+        this.id = id;
+        this.name = name;
+        this.brief = brief;
+        this.contact_Address = contact_Address;
+        this.remarks = remarks;
+    }
 }

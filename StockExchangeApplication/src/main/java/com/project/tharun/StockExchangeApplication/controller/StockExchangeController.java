@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/stockExchanges")
 public class StockExchangeController {
     @Autowired
@@ -40,7 +41,7 @@ public class StockExchangeController {
         return ResponseEntity.ok(stockExchangeService.editStockExchange(stockExchangeDTO));
     }
     @DeleteMapping(path="/{id}")
-    public void deleteStockExchange(@RequestBody String id)
+    public void deleteStockExchange(@PathVariable String id)
     {
         stockExchangeService.deleteStockExchange(id);
     }
