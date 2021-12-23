@@ -1,10 +1,7 @@
 package com.project.tharun.SectorServiceApplication.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,6 +11,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Document(collection = "Sector")
 public class Sector {
@@ -30,4 +28,9 @@ public class Sector {
     @DBRef
     private List<Company> companies=new ArrayList<>();
 
+    public Sector(String id, @NonNull String name, @NonNull String brief) {
+        this.id = id;
+        this.name = name;
+        this.brief = brief;
+    }
 }
