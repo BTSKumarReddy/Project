@@ -75,24 +75,24 @@ public class StockPriceServiceImpl implements StockPriceService{
         Date fromDate =new SimpleDateFormat("dd-MM-yyyy").parse(companyCompareRequest.getFromPeriod());
         Date toDate=new SimpleDateFormat("dd-MM-yyyy").parse(companyCompareRequest.getToPeriod());
         List<StockPrice> stockPrices=stockPriceRepository.findByCompanyCodeAndStockExchange(companyCompareRequest.getCompanyCode(),companyCompareRequest.getStockExchangeName());
-        List<StockPrice>  filteredList =stockPrices.stream().filter(stockPrice -> {
-            Date date=null;
-            try {
-                date=new SimpleDateFormat("dd-MM-yyyy").parse(stockPrice.getDate());
-            }
-            catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return date.after(fromDate) && date.before(toDate);
-        }).collect(Collectors.toList());
-        return stockPriceMapper.toStockPriceDTOs(filteredList);
+//        List<StockPrice>  filteredList =stockPrices.stream().filter(stockPrice -> {
+//            Date date=null;
+//            try {
+//                date=new SimpleDateFormat("dd-MM-yyyy").parse(stockPrice.getDate());
+//            }
+//            catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            return date.after(fromDate) && date.before(toDate);
+//        }).collect(Collectors.toList());
+        return stockPriceMapper.toStockPriceDTOs(stockPrices);
     }
 
     @Override
     public List<StockPriceDTO> getStockPricesForSectorComparison(SectorCompareRequest sectorCompareRequest) throws ParseException {
 
-        Date fromDate =new SimpleDateFormat("dd-MM-yyyy").parse(sectorCompareRequest.getFromPeriod());
-        Date toDate=new SimpleDateFormat("dd-MM-yyyy").parse(sectorCompareRequest.getToPeriod());
+        Date fromDate =new SimpleDateFormat("dd/MM/yyyy").parse(sectorCompareRequest.getFromPeriod());
+        Date toDate=new SimpleDateFormat("dd/MM/yyyy").parse(sectorCompareRequest.getToPeriod());
         List<StockPrice> stockPricesForSector=new ArrayList<>();
         for(CompanyDTO companyDTO:sectorClient.getCompanies(sectorCompareRequest.getSectorName()))
         {
@@ -100,7 +100,7 @@ public class StockPriceServiceImpl implements StockPriceService{
             List<StockPrice>  filteredList =stockPrices.stream().filter(stockPrice -> {
                 Date date=null;
                 try {
-                    date=new SimpleDateFormat("dd-MM-yyyy").parse(stockPrice.getDate());
+                    date=new SimpleDateFormat("dd/MM/yyyy").parse(stockPrice.getDate());
                 }
                 catch (ParseException e) {
                     e.printStackTrace();
