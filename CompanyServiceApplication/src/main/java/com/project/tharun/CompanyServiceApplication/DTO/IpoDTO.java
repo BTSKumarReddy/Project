@@ -11,6 +11,7 @@ public class IpoDTO {
 
     private String id;
     private String companyName;
+    private String stockExchange;
     private double  pricePerShare;
     private long totalNumberOfShares;
     private String openDateTime;

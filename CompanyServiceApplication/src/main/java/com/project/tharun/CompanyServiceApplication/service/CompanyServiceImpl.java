@@ -1,6 +1,7 @@
 package com.project.tharun.CompanyServiceApplication.service;
 
 import com.project.tharun.CompanyServiceApplication.DAO.CompanyRepository;
+import com.project.tharun.CompanyServiceApplication.DAO.IPORepository;
 import com.project.tharun.CompanyServiceApplication.DTO.CompanyDTO;
 import com.project.tharun.CompanyServiceApplication.DTO.IpoDTO;
 import com.project.tharun.CompanyServiceApplication.Mapper.CompanyMapper;
@@ -34,6 +35,9 @@ public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private SectorClient sectorClient;
 
+    @Autowired
+    private IPORepository ipoRepository;
+
 
     @Override
     public List<CompanyDTO> getCompanies() {
@@ -61,13 +65,14 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public CompanyDTO addCompany(CompanyDTO companyDTO) {
         Company company=companyMapper.toCompany(companyDTO);
-        company=companyRepository.save(company);
         sectorClient.addCompanyToSector(company.getSector(),companyDTO);
         String[] stockExchangeNames=company.getStockExchanges().split(",");
         for(String temp:stockExchangeNames)
         {
             stockExchangeClient.addCompanyToStockExchange(temp,companyDTO);
         }
+        company.getIpos().add(ipoRepository.findByCompanyName(company.getCompanyName()));
+        company=companyRepository.save(company);
         return companyDTO;
     }
 

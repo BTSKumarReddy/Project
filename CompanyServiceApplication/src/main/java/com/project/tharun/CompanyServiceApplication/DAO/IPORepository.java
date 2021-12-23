@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPORepository extends MongoRepository<Ipo,String> {
+    public Ipo findByCompanyName(String companyName);
 }

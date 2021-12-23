@@ -19,6 +19,8 @@ public class Ipo {
 
     private String companyName;
 
+    private String stockExchange;
+
     private double  pricePerShare;
 
     private long totalNumberOfShares;

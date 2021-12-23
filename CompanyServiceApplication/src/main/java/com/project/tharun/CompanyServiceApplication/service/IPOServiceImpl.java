@@ -35,6 +35,12 @@ public class IPOServiceImpl implements IPOService{
     }
 
     @Override
+    public IpoDTO findByCompanyName(String companyName) {
+        return ipoMapper.toIPODTO(ipoRepository.findByCompanyName(companyName));
+    }
+
+
+    @Override
     public IpoDTO addIPO(IpoDTO ipoDTO) {
 
         return ipoMapper.toIPODTO(ipoRepository.save(ipoMapper.toIPO(ipoDTO)));

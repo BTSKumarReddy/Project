@@ -26,6 +26,7 @@ public class Company {
     private String sector;
     private String brief;
     private String code;
+
     @DBRef
     private List<Ipo> ipos=new ArrayList<>();
 
